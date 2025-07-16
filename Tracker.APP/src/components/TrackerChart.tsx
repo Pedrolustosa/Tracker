@@ -131,23 +131,187 @@ const TrackerChart: React.FC = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <Card>
-        <Card.Header>
-          <h2>Gráfico de Ângulos do Tracker</h2>
-        </Card.Header>
-        <Card.Body>
-          <TrackerForm formValues={formValues} handleChange={handleChange} handleSubmit={handleSubmit} submitted={submitted} />
+    <div className="container-fluid">
+      {/* Seção Hero */}
+      <div className="hero-section fade-in">
+        <h1 className="hero-title">☀️ Rastreador Solar</h1>
+        <p className="hero-subtitle">
+          Sistema Inteligente de Análise de Ângulos para Painéis Solares
+        </p>
+      </div>
 
-          {loading ? (
-            <Spinner animation="border" role="status" className="mt-3">
-              <span className="visually-hidden">Carregando...</span>
-            </Spinner>
-          ) : (
-            <Line data={chartData} options={options} className="mt-4" />
+      <div className="row">
+        {/* Seção do Formulário */}
+        <div className="col-lg-5 col-md-6 mb-4">
+          <div className="card slide-in">
+            <div className="card-header">
+              <div className="d-flex align-items-center">
+                <span className="section-icon me-2">⚙️</span>
+                <h5 className="mb-0">Configuração do Sistema</h5>
+              </div>
+            </div>
+            <div className="card-body">
+              <TrackerForm 
+                formValues={formValues} 
+                handleChange={handleChange} 
+                handleSubmit={handleSubmit} 
+                submitted={submitted} 
+                loading={loading}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Seção de Resultados */}
+        <div className="col-lg-7 col-md-6">
+          {loading && (
+            <div className="loading-container fade-in">
+              <div className="spinner-border" role="status">
+                <span className="sr-only">Carregando...</span>
+              </div>
+              <div className="loading-text">
+                <strong>Processando dados solares...</strong>
+                <br />
+                <small>Calculando ângulos otimizados do rastreador</small>
+              </div>
+            </div>
           )}
-        </Card.Body>
-      </Card>
+
+          {!loading && data.length === 0 && (
+            <div className="card fade-in">
+              <div className="card-body text-center py-5">
+                <div className="mb-4">
+                  <span style={{ fontSize: '4rem', opacity: 0.3 }}>📊</span>
+                </div>
+                <h5 className="text-muted mb-3">Aguardando Configuração</h5>
+                <p className="text-muted">
+                  Configure os parâmetros do sistema e clique em "Calcular Ângulos" 
+                  para visualizar os resultados da análise solar.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {!loading && data.length > 0 && (
+            <div className="results-section fade-in">
+              <div className="results-header">
+                <h3 className="results-title">
+                  <span className="section-icon me-2">📈</span>
+                  Análise de Ângulos Solares
+                </h3>
+                <div className="results-info">
+                  {data.length} pontos de dados
+                </div>
+              </div>
+              
+              <div className="chart-container">
+                <Line data={chartData} options={options} />
+              </div>
+              
+              <div className="mt-4 p-3" style={{ 
+                background: 'var(--solar-light-gray)', 
+                borderRadius: '10px',
+                borderLeft: '4px solid var(--solar-orange)'
+              }}>
+                <div className="row text-center">
+                  <div className="col-md-4">
+                    <div className="mb-2">
+                      <strong style={{ color: 'var(--solar-green)' }}>📍 Localização</strong>
+                    </div>
+                    <small className="text-muted">
+                      {formValues.latitude}°, {formValues.longitude}°
+                    </small>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="mb-2">
+                      <strong style={{ color: 'var(--solar-green)' }}>📅 Período</strong>
+                    </div>
+                    <small className="text-muted">
+                      {formValues.start} até {formValues.end}
+                    </small>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="mb-2">
+                      <strong style={{ color: 'var(--solar-green)' }}>🔧 Configuração</strong>
+                    </div>
+                    <small className="text-muted">
+                      Inclinação: {formValues.axis_tilt}° | Azimute: {formValues.axis_azimuth}°
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Seção de Informações Adicionais */}
+      {!loading && data.length > 0 && (
+        <div className="row mt-4">
+          <div className="col-12">
+            <div className="card fade-in">
+              <div className="card-header">
+                <div className="d-flex align-items-center">
+                  <span className="section-icon me-2">💡</span>
+                  <h5 className="mb-0">Informações do Sistema</h5>
+                </div>
+              </div>
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-3 text-center mb-3">
+                    <div className="p-3" style={{ 
+                      background: 'linear-gradient(135deg, var(--solar-gold), var(--solar-yellow))',
+                      borderRadius: '15px',
+                      color: 'white'
+                    }}>
+                      <div style={{ fontSize: '2rem' }}>☀️</div>
+                      <strong>Energia Solar</strong>
+                      <br />
+                      <small>Fonte Renovável</small>
+                    </div>
+                  </div>
+                  <div className="col-md-3 text-center mb-3">
+                    <div className="p-3" style={{ 
+                      background: 'linear-gradient(135deg, var(--solar-light-green), var(--solar-green))',
+                      borderRadius: '15px',
+                      color: 'white'
+                    }}>
+                      <div style={{ fontSize: '2rem' }}>🌱</div>
+                      <strong>Sustentável</strong>
+                      <br />
+                      <small>Zero Emissões</small>
+                    </div>
+                  </div>
+                  <div className="col-md-3 text-center mb-3">
+                    <div className="p-3" style={{ 
+                      background: 'linear-gradient(135deg, var(--solar-orange), var(--solar-yellow))',
+                      borderRadius: '15px',
+                      color: 'white'
+                    }}>
+                      <div style={{ fontSize: '2rem' }}>⚡</div>
+                      <strong>Eficiência</strong>
+                      <br />
+                      <small>Máximo Aproveitamento</small>
+                    </div>
+                  </div>
+                  <div className="col-md-3 text-center mb-3">
+                    <div className="p-3" style={{ 
+                      background: 'linear-gradient(135deg, var(--solar-yellow), var(--solar-orange))',
+                      borderRadius: '15px',
+                      color: 'white'
+                    }}>
+                      <div style={{ fontSize: '2rem' }}>🔧</div>
+                      <strong>Automação</strong>
+                      <br />
+                      <small>Rastreamento Inteligente</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
