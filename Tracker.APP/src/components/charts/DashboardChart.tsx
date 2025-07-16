@@ -3,6 +3,7 @@ import { Line, Bar } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartLine, faDownload, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import './DashboardChart.css';
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
 
@@ -58,26 +59,26 @@ const DashboardChart: React.FC<DashboardChartProps> = ({
   };
 
   return (
-    <div className="card results-section fade-in dashboard-card" style={{ marginTop: 32, boxShadow: '0 8px 32px rgba(44, 62, 80, 0.13)' }}>
-      <div className="card-header d-flex align-items-center justify-content-between" style={{ background: 'var(--gradient-earth)', borderRadius: '16px 16px 0 0', padding: '1.2rem 2rem' }}>
-        <div className="d-flex align-items-center gap-2">
-          <FontAwesomeIcon icon={faChartLine} style={{ fontSize: 26, color: '#ffd700', marginRight: 12 }} />
-          <span style={{ color: 'var(--solar-white)', fontWeight: 700, fontSize: '1.25rem' }}>{title}</span>
+    <div className="dashboard-card fade-in">
+      <div className="chart-header">
+        <div className="chart-title-section">
+          <FontAwesomeIcon icon={faChartLine} className="chart-icon" />
+          <h3 className="chart-title">{title}</h3>
         </div>
-        <div className="d-flex gap-3">
+        <div className="chart-actions">
           {onExport && (
-            <button className="btn btn-outline-light btn-sm" title="Exportar" onClick={onExport} style={{ borderRadius: 12, marginRight: 8 }}>
+            <button className="chart-action-btn" title="Exportar" onClick={onExport}>
               <FontAwesomeIcon icon={faDownload} />
             </button>
           )}
           {onRefresh && (
-            <button className="btn btn-outline-light btn-sm" title="Atualizar" onClick={onRefresh} style={{ borderRadius: 12 }}>
+            <button className="chart-action-btn" title="Atualizar" onClick={onRefresh}>
               <FontAwesomeIcon icon={faSyncAlt} />
             </button>
           )}
         </div>
       </div>
-      <div className="card-body" style={{ padding: '2rem' }}>
+      <div className="chart-body">
         {type === 'bar' ? (
           <Bar data={chartData} options={options} />
         ) : (

@@ -1,0 +1,124 @@
+/* Estilos para PeriodFields com DatePicker */
+
+.period-fields .card {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.period-fields .card-header {
+  background: transparent;
+  border: none;
+  padding: 0 0 1rem 0;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.period-fields .card-body {
+  padding: 0;
+}
+
+/* Estilos customizados para o DatePicker */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.react-datepicker__input-container input.is-invalid {
+  border-color: #dc3545;
+}
+
+.react-datepicker__input-container input.is-valid {
+  border-color: #28a745;
+}
+
+/* Customização do calendário */
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker__header {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+}
+
+.react-datepicker__current-month {
+  color: white;
+  font-weight: 600;
+}
+
+.react-datepicker__day-name {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.react-datepicker__navigation {
+  top: 12px;
+}
+
+.react-datepicker__navigation--previous {
+  border-right-color: white;
+}
+
+.react-datepicker__navigation--next {
+  border-left-color: white;
+}
+
+.react-datepicker__day {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.react-datepicker__day:hover {
+  background: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+}
+
+.react-datepicker__day--selected {
+  background: #0ea5e9;
+  color: white;
+}
+
+.react-datepicker__day--selected:hover {
+  background: #0284c7;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background: rgba(14, 165, 233, 0.2);
+  color: #0ea5e9;
+}
+
+.react-datepicker__day--today {
+  font-weight: 600;
+  color: #0ea5e9;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .period-fields .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .react-datepicker {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,94 @@
+/* Estilos para DashboardChart */
+
+.dashboard-card {
+  margin-top: 2rem;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.chart-header {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  border-radius: 16px 16px 0 0;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chart-title-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-icon {
+  font-size: 1.625rem;
+  color: #ffd700;
+  margin-right: 0.75rem;
+}
+
+.chart-title {
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.chart-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.chart-action-btn {
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.chart-action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+.chart-body {
+  padding: 2rem;
+  background: white;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-header {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .chart-title {
+    font-size: 1.125rem;
+  }
+  
+  .chart-body {
+    padding: 1.5rem;
+  }
+}
