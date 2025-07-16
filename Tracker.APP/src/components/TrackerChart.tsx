@@ -36,7 +36,7 @@ const TrackerChart: React.FC = () => {
     gcr: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
@@ -133,9 +133,18 @@ const TrackerChart: React.FC = () => {
   return (
     <div className="container-fluid">
       {/* Seção Hero */}
-      <div className="hero-section fade-in">
-        <h1 className="hero-title">☀️ Rastreador Solar</h1>
-        <p className="hero-subtitle">
+      <div className="hero-section fade-in text-center" style={{ marginBottom: 24 }}>
+        <div className="d-flex align-items-center justify-content-center" style={{ gap: 18 }}>
+          <img
+            src={process.env.PUBLIC_URL + '/logo_tracker.png'}
+            alt="Logo Rastreador Solar"
+            style={{ height: 58, width: 58, objectFit: 'contain', borderRadius: 14, boxShadow: '0 4px 16px rgba(44,62,80,0.07)' }}
+          />
+          <h1 className="hero-title mb-0" style={{ fontWeight: 800, fontSize: '2.1rem', color: 'var(--solar-green)' }}>
+            Rastreador Solar
+          </h1>
+        </div>
+        <p className="hero-subtitle mt-2">
           Sistema Inteligente de Análise de Ângulos para Painéis Solares
         </p>
       </div>
