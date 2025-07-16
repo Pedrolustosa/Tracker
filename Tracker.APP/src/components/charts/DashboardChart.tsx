@@ -45,15 +45,48 @@ const DashboardChart: React.FC<DashboardChartProps> = ({
     })),
   };
 
+  // Função para formatar data no padrão brasileiro
+  const formatDateToBrazilian = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch (error) {
+      return dateString;
+    }
+  };
+
   const options: any = {
     responsive: true,
     plugins: {
       legend: { display: true },
       title: { display: false },
-      tooltip: { enabled: true },
+      tooltip: { 
+        enabled: true,
+        callbacks: {
+          title: function(context: any) {
+            return formatDateToBrazilian(context[0].label);
+          }
+        }
+      },
     },
     scales: {
-      x: { grid: { color: '#ecf0f1' }, ticks: { color: '#2d5016' } },
+      x: { 
+        grid: { color: '#ecf0f1' }, 
+        ticks: { 
+          color: '#2d5016',
+          callback: function(value: any, index: number) {
+            const label = labels[index];
+            return formatDateToBrazilian(label);
+          },
+          maxTicksLimit: 8 // Limita o número de ticks para evitar sobreposição
+        } 
+      },
       y: { grid: { color: '#ecf0f1' }, ticks: { color: '#2d5016' } },
     },
   };

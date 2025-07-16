@@ -159,6 +159,24 @@ const TrackerChart: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true); // Marca o formulário como enviado
+    
+    // Verificar se todos os campos obrigatórios estão preenchidos
+    const requiredFields = ['latitude', 'longitude', 'start', 'end', 'altitude', 'axis_tilt', 'axis_azimuth', 'max_angle', 'rest_position', 'gcr'];
+    const emptyFields = requiredFields.filter(field => {
+      const value = (formValues as any)[field];
+      return value === '' || value === null || value === undefined;
+    });
+    
+    // Verificar se o fuso horário está vazio (não tem valor padrão)
+    if (!formValues.tz || formValues.tz === '') {
+      emptyFields.push('tz');
+    }
+    
+    if (emptyFields.length > 0) {
+      toastr.error(`Por favor, preencha todos os campos obrigatórios: ${emptyFields.join(', ')}`);
+      return;
+    }
+    
     fetchData();
   };
 
@@ -214,9 +232,10 @@ const TrackerChart: React.FC = () => {
                   name="latitude"
                   value={formValues.latitude}
                   onChange={handleChange}
-                  className="form-control"
+                  className={`form-control ${getFieldClassName(formValues.latitude)}`}
                   placeholder="Ex: -23.5505"
                   step="any"
+                  required
                 />
               </div>
               
@@ -230,9 +249,10 @@ const TrackerChart: React.FC = () => {
                   name="longitude"
                   value={formValues.longitude}
                   onChange={handleChange}
-                  className="form-control"
+                  className={`form-control ${getFieldClassName(formValues.longitude)}`}
                   placeholder="Ex: -46.6333"
                   step="any"
+                  required
                 />
               </div>
               
@@ -246,8 +266,9 @@ const TrackerChart: React.FC = () => {
                   name="altitude"
                   value={formValues.altitude}
                   onChange={handleChange}
-                  className="form-control"
+                  className={`form-control ${getFieldClassName(formValues.altitude)}`}
                   placeholder="Ex: 760"
+                  required
                 />
               </div>
               
@@ -260,7 +281,8 @@ const TrackerChart: React.FC = () => {
                   name="tz"
                   value={formValues.tz}
                   onChange={handleChange}
-                  className="form-control"
+                  className={`form-control ${getFieldClassName(formValues.tz)}`}
+                  required
                 >
                   <option value="">Selecione o fuso horário</option>
                   
@@ -328,9 +350,10 @@ const TrackerChart: React.FC = () => {
                   name="axis_tilt"
                   value={formValues.axis_tilt}
                   onChange={handleChange}
-                  className="form-control"
+                  className={`form-control ${getFieldClassName(formValues.axis_tilt)}`}
                   placeholder="Ex: 0"
                   step="any"
+                  required
                 />
               </div>
               
@@ -344,9 +367,10 @@ const TrackerChart: React.FC = () => {
                   name="axis_azimuth"
                   value={formValues.axis_azimuth}
                   onChange={handleChange}
-                  className="form-control"
+                  className={`form-control ${getFieldClassName(formValues.axis_azimuth)}`}
                   placeholder="Ex: 180"
                   step="any"
+                  required
                 />
               </div>
               
@@ -360,9 +384,10 @@ const TrackerChart: React.FC = () => {
                   name="max_angle"
                   value={formValues.max_angle}
                   onChange={handleChange}
-                  className="form-control"
+                  className={`form-control ${getFieldClassName(formValues.max_angle)}`}
                   placeholder="Ex: 45"
                   step="any"
+                  required
                 />
               </div>
               
@@ -376,9 +401,10 @@ const TrackerChart: React.FC = () => {
                   name="rest_position"
                   value={formValues.rest_position}
                   onChange={handleChange}
-                  className="form-control"
+                  className={`form-control ${getFieldClassName(formValues.rest_position)}`}
                   placeholder="Ex: 0"
                   step="any"
+                  required
                 />
               </div>
               
@@ -392,11 +418,12 @@ const TrackerChart: React.FC = () => {
                   name="gcr"
                   value={formValues.gcr}
                   onChange={handleChange}
-                  className="form-control"
+                  className={`form-control ${getFieldClassName(formValues.gcr)}`}
                   placeholder="Ex: 0.4"
                   step="0.01"
                   min="0"
                   max="1"
+                  required
                 />
               </div>
             </div>
